@@ -2,21 +2,26 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Create past results using actual vehicle data
-const createPastResults = (vehicles, wonAuctions) => {
-  // Won auctions
-  const wonResults = Object.entries(wonAuctions).map(([id, vehicle]) => ({
-    id: parseInt(id),
-    title: vehicle.title,
-    date: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000)
-      .toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' }),
-    price: `$${vehicle.currentBid}`,
-    status: 'won',
-    make: vehicle.make
-  }));
+const createPastResults = (vehicles) => {
+  // Won auctions (vehicles 1 and 3)
+  const wonResults = [1, 3].map(id => {
+    const vehicle = vehicles[id];
+    if (!vehicle) return null;
+    return {
+      id,
+      title: vehicle.title,
+      date: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000)
+        .toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' }),
+      price: `$${vehicle.currentBid}`,
+      status: 'won',
+      make: vehicle.make
+    };
+  }).filter(Boolean);
 
   // Lost auctions (vehicles 2 and 4)
   const lostResults = [2, 4].map(id => {
     const vehicle = vehicles[id];
+    if (!vehicle) return null;
     return {
       id,
       title: vehicle.title,
@@ -26,7 +31,7 @@ const createPastResults = (vehicles, wonAuctions) => {
       status: 'lost',
       make: vehicle.make
     };
-  });
+  }).filter(Boolean);
 
   // Combine and sort by date
   return [...wonResults, ...lostResults].sort((a, b) => 
@@ -34,13 +39,14 @@ const createPastResults = (vehicles, wonAuctions) => {
   );
 };
 
-const PastResultsDrawer = ({ isOpen, onClose, vehicles, wonAuctions }) => {
+const PastResultsDrawer = ({ isOpen, onClose, vehicles }) => {
   const navigate = useNavigate();
   
-  // Only create past results if we have both vehicles and won auctions data
-  const pastResults = vehicles && wonAuctions ? createPastResults(vehicles, wonAuctions) : [];
+  // Only create past results if we have vehicles data
+  const pastResults = vehicles ? createPastResults(vehicles) : [];
 
   const handleItemClick = (result) => {
+    // For won auctions, use the same vehicle data
     const path = result.status === 'won' 
       ? `/sale-confirmation/${result.id}`
       : `/listings/${result.id}`;

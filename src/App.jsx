@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import MainLayout from './components/Layout/MainLayout';
 import Listings from './pages/Listings';
 import VehicleListing from './pages/VehicleListing';
@@ -30,42 +30,6 @@ function App() {
     loadData();
   }, []);
 
-  // Create won auctions data from loaded vehicles
-  const wonAuctions = useMemo(() => {
-    if (!vehicles[1] || !vehicles[3]) return {};
-
-    return {
-      1: {
-        ...vehicles[1],
-        winningBid: vehicles[1].currentBid,
-        buyer: {
-          name: "CPRT BUYER",
-          phone: "+1615-123-4567",
-          pickupContact: "John Smith",
-          email: "john@ibuycars.com",
-          location: {
-            street: "123 Example Street",
-            city: "Nashville, TN 37203",
-          },
-        }
-      },
-      3: {
-        ...vehicles[3],
-        winningBid: vehicles[3].currentBid,
-        buyer: {
-          name: "CPRT BUYER",
-          phone: "+1615-123-4567",
-          pickupContact: "Mike Johnson",
-          email: "mike@ibuycars.com",
-          location: {
-            street: "456 Example Street",
-            city: "Nashville, TN 37203",
-          },
-        }
-      }
-    };
-  }, [vehicles]);
-
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f7fafc]">
@@ -81,7 +45,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/listings" replace />} />
-        <Route element={<MainLayout vehicles={vehicles} wonAuctions={wonAuctions} />}>
+        <Route element={<MainLayout vehicles={vehicles} />}>
           <Route 
             path="/listings" 
             element={<Listings vehicles={vehicles} makes={makes} />} 
@@ -95,7 +59,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route 
             path="/sale-confirmation/:id" 
-            element={<SaleConfirmation vehicles={wonAuctions} />} 
+            element={<SaleConfirmation vehicles={vehicles} />} 
           />
         </Route>
       </Routes>

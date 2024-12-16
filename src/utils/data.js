@@ -14,6 +14,7 @@ const parseCSV = (csv) => {
 
 export const loadVehicles = async () => {
   try {
+    // In Vite, public directory files are served at the root path
     const response = await fetch('/db.csv');
     const csvText = await response.text();
     const records = parseCSV(csvText);

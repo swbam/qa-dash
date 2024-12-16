@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   CheckCircle,
   MapPin,
@@ -10,15 +10,25 @@ import {
   Contact,
 } from "lucide-react";
 import VehicleCondition from "../VehicleCondition";
-import VehicleLogo from "../VehicleLogo";
-import Map from "../Map";
 
 const ModernSaleConfirmation = ({ vehicles }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const vehicleDetails = vehicles[id];
 
   if (!vehicleDetails) {
-    return <div>Vehicle not found</div>;
+    return (
+      <div className="text-center py-12">
+        <h2 className="text-2xl font-semibold text-gray-900">Vehicle not found</h2>
+        <p className="mt-2 text-gray-500">The vehicle you're looking for doesn't exist or has been removed.</p>
+        <button
+          onClick={() => navigate('/listings')}
+          className="mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-auction-blue-600 hover:bg-auction-blue-700"
+        >
+          Return to Listings
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -63,17 +73,13 @@ const ModernSaleConfirmation = ({ vehicles }) => {
                 <Car className="text-auction-blue-600" size={24} />
                 <h2 className="text-lg font-semibold">Vehicle Information</h2>
               </div>
-
-              <div className="flex justify-center mb-6">
-                <VehicleLogo make={vehicleDetails.make} size="large" />
-              </div>
               
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { label: "MAKE/MODEL", value: `${vehicleDetails.make} ${vehicleDetails.model}` },
                   { label: "YEAR", value: vehicleDetails.year },
                   { label: "VIN", value: vehicleDetails.vin },
-                  { label: "ODOMETER", value: `${vehicleDetails.odometer} mi` },
+                  { label: "ODOMETER", value: `${vehicleDetails.mileage} mi` },
                 ].map((detail, index) => (
                   <div key={index} className="bg-gray-50 p-3 rounded">
                     <div className="text-sm text-gray-500">{detail.label}</div>
@@ -115,7 +121,7 @@ const ModernSaleConfirmation = ({ vehicles }) => {
           <div className="bg-auction-green-50 rounded-lg p-6 border-2 border-auction-green-600 text-center">
             <div className="text-sm text-auction-green-700 font-medium">WINNING BID</div>
             <div className="text-3xl font-bold text-auction-green-800">
-              ${vehicleDetails.winningBid}
+              ${vehicleDetails.currentBid}
             </div>
           </div>
 
@@ -126,8 +132,8 @@ const ModernSaleConfirmation = ({ vehicles }) => {
               <h2 className="text-lg font-semibold">Buyer Details</h2>
             </div>
             {[
-              { label: "BUYER", value: vehicleDetails.buyer.name },
-              { label: "PHONE", value: vehicleDetails.buyer.phone },
+              { label: "BUYER", value: "CPRT BUYER" },
+              { label: "PHONE", value: "+1615-123-4567" },
             ].map((detail, index) => (
               <div key={index} className="bg-auction-blue-50 p-3 rounded-lg mb-3">
                 <div className="text-sm text-auction-blue-600">{detail.label}</div>
@@ -148,24 +154,28 @@ const ModernSaleConfirmation = ({ vehicles }) => {
               <div className="bg-auction-blue-50 p-3 rounded-lg mb-3">
                 <div className="text-sm text-auction-blue-600">PICKUP CONTACT NAME</div>
                 <div className="font-medium text-auction-blue-800">
-                  {vehicleDetails.buyer.pickupContact}
+                  John Smith
                 </div>
               </div>
               <div className="bg-auction-blue-50 p-3 rounded-lg mb-3">
                 <div className="text-sm text-auction-blue-600">EMAIL</div>
                 <div className="font-medium text-auction-blue-800">
-                  {vehicleDetails.buyer.email}
+                  john@ibuycars.com
                 </div>
               </div>
             </div>
 
             <div className="bg-gray-50 p-3 rounded-lg">
-              <p className="font-medium">{vehicleDetails.buyer.location.street}</p>
-              <p className="text-sm text-gray-500 mt-1">{vehicleDetails.buyer.location.city}</p>
+              <p className="font-medium">123 Example Street</p>
+              <p className="text-sm text-gray-500 mt-1">Nashville, TN 37203</p>
             </div>
 
-            <div className="mt-4 mb-6">
-              <Map address={`${vehicleDetails.buyer.location.street}, ${vehicleDetails.buyer.location.city}`} />
+            <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden mt-4 mb-6">
+              <img
+                src="https://via.placeholder.com/600x300.png?text=Location+Map"
+                alt="Location map"
+                className="w-full h-full object-cover"
+              />
             </div>
 
             <p className="text-center text-red-500 text-sm mb-2">
