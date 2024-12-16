@@ -1,0 +1,30 @@
+id,title,mileage,location,currentBid,timeLeft,make,image,conditions
+1,2006 Honda Civic LX,185234,Nashville TN,1200,2h 15m,Honda,/api/placeholder/400/300,Front End Damage|Clean Title|Starts and Drives|Airbags Deployed|Keys Available
+2,2008 Toyota Corolla,198567,Atlanta GA,800,4h 30m,Toyota,/api/placeholder/400/300,Rear End Damage|Salvage Title|Engine Start Program|Airbags Not Deployed|No Keys
+3,2005 Ford Focus,212890,Miami FL,650,1h 45m,Ford,/api/placeholder/400/300,Flood Damage|Salvage Title|Won't Start|Water Damage|Keys Available
+4,2007 Chevrolet Malibu,165456,Memphis TN,920,3h 20m,Chevrolet,/api/placeholder/400/300,Side Damage|Clean Title|Starts and Drives|Airbags Not Deployed|Keys Available
+5,2004 Volkswagen Jetta,225678,Houston TX,750,5h 45m,Volkswagen,/api/placeholder/400/300,Transmission Issues|Clean Title|Starts|No AC|Keys Available
+6,2005 Nissan Altima,198345,Phoenix AZ,980,1h 30m,Nissan,/api/placeholder/400/300,Front End Damage|Rebuilt Title|Starts and Drives|Minor Rust|Keys Available
+7,2003 BMW 325i,245890,Dallas TX,1500,6h 15m,BMW,/api/placeholder/400/300,Mechanical Issues|Clean Title|Won't Start|Interior Damage|Keys Available
+8,2006 Mercedes C230,212567,Chicago IL,1800,2h 45m,Mercedes,/api/placeholder/400/300,Electrical Issues|Clean Title|Starts|Suspension Issues|Keys Available
+9,2007 Toyota Camry,178934,Seattle WA,1100,4h 20m,Toyota,/api/placeholder/400/300,Side Impact|Salvage Title|Starts and Drives|Frame Damage|Keys Available
+10,2004 Honda Accord,205678,Portland OR,890,3h 10m,Honda,/api/placeholder/400/300,Rear Damage|Clean Title|Runs Rough|Transmission Slip|No Keys
+11,2005 Ford Taurus,167890,Denver CO,600,5h 30m,Ford,/api/placeholder/400/300,Front End Damage|Salvage Title|Engine Knock|Airbags Deployed|Keys Available
+12,2006 Chevrolet Cobalt,189567,Austin TX,720,2h 50m,Chevrolet,/api/placeholder/400/300,Hail Damage|Clean Title|Starts and Drives|Minor Dents|Keys Available
+13,2003 Volkswagen Passat,234567,San Diego CA,850,1h 15m,Volkswagen,/api/placeholder/400/300,Engine Issues|Rebuilt Title|Won't Start|Interior Good|Keys Available
+14,2004 Nissan Maxima,212345,Las Vegas NV,930,4h 45m,Nissan,/api/placeholder/400/300,Rear End Damage|Clean Title|Starts|AC Works|No Keys
+15,2002 BMW 330i,256789,Orlando FL,1400,3h 30m,BMW,/api/placeholder/400/300,Transmission Issues|Salvage Title|Starts and Drives|Leather Damage|Keys Available
+16,2005 Mercedes E320,223456,Charlotte NC,1600,6h 20m,Mercedes,/api/placeholder/400/300,Side Damage|Clean Title|Engine Issues|Power Windows Work|Keys Available
+17,2008 Toyota Yaris,156789,Indianapolis IN,780,2h 40m,Toyota,/api/placeholder/400/300,Front End Damage|Rebuilt Title|Starts|Minor Rust|No Keys
+18,2006 Honda Element,198234,Columbus OH,950,5h 15m,Honda,/api/placeholder/400/300,Roll Over Damage|Salvage Title|Won't Start|Frame Straight|Keys Available
+19,2004 Ford Escape,178567,Kansas City MO,820,1h 55m,Ford,/api/placeholder/400/300,Theft Recovery|Clean Title|Starts and Drives|Interior Good|Keys Available
+20,2007 Chevrolet Impala,167890,St Louis MO,880,4h 10m,Chevrolet,/api/placeholder/400/300,Rear Damage|Clean Title|Runs Well|Paint Issues|Keys Available
+21,2003 Volkswagen Golf,245678,Minneapolis MN,700,3h 25m,Volkswagen,/api/placeholder/400/300,Front End Damage|Salvage Title|Engine Good|Suspension Issues|No Keys
+22,2005 Nissan Sentra,189567,Detroit MI,640,6h 30m,Nissan,/api/placeholder/400/300,Side Impact|Clean Title|Starts|Transmission Good|Keys Available
+23,2004 BMW 325xi,234567,Cleveland OH,1300,2h 35m,BMW,/api/placeholder/400/300,Mechanical Issues|Rebuilt Title|Won't Start|AWD Works|Keys Available
+24,2006 Mercedes CLK320,198765,Pittsburgh PA,1750,5h 40m,Mercedes,/api/placeholder/400/300,Electrical Issues|Clean Title|Starts and Drives|Convertible Top Bad|Keys Available
+25,2007 Toyota Matrix,167834,Richmond VA,860,1h 40m,Toyota,/api/placeholder/400/300,Hail Damage|Clean Title|Runs Well|AC Works|Keys Available
+26,2005 Honda Pilot,212345,Louisville KY,980,4h 25m,Honda,/api/placeholder/400/300,Front End Damage|Salvage Title|Starts|Third Row Good|No Keys
+27,2004 Ford Explorer,198567,Oklahoma City OK,750,3h 15m,Ford,/api/placeholder/400/300,Rear Damage|Clean Title|Engine Issues|4WD Works|Keys Available
+28,2006 Chevrolet Equinox,178923,Albuquerque NM,840,6h 10m,Chevrolet,/api/placeholder/400/300,Side Damage|Rebuilt Title|Starts and Drives|Interior Clean|Keys Available
+29,2003 Volkswagen Beetle,223456,Salt Lake City UT,580,2h 55m,Volkswagen,/api/placeholder/400/300,Transmission Issues|Clean Title|Won't Start|Cosmetic Damage|Keys Available
