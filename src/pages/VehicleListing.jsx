@@ -40,12 +40,37 @@ const VehicleListing = ({ vehicles }) => {
   const minBidAmount = parseInt(vehicleDetails.currentBid?.replace(/,/g, '')) + 100 || 0;
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="space-y-4 md:space-y-6">
+      {/* Mobile Bid Info - Fixed to bottom on mobile */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 pb-safe">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Clock className="text-auction-blue-600" size={20} />
+            <span className="text-red-600 font-semibold">{vehicleDetails.timeLeft} left</span>
+          </div>
+          <div className="text-sm text-gray-500">
+            Min Increment: $100
+          </div>
+        </div>
+        <div className="text-center p-3 bg-auction-blue-50 rounded-lg border-2 border-auction-blue-600 mb-3">
+          <div className="text-sm text-auction-blue-600 font-medium">CURRENT BID</div>
+          <div className="text-2xl font-bold text-auction-blue-800">
+            ${vehicleDetails.currentBid}
+          </div>
+        </div>
+        <button
+          onClick={() => document.getElementById('bid-form').scrollIntoView({ behavior: 'smooth' })}
+          className="w-full bg-auction-blue-600 text-white py-3 px-4 rounded-md hover:bg-auction-blue-800 transition-colors font-medium"
+        >
+          Place Bid
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 pb-[200px] md:pb-0">
         {/* Left Column - Main Info */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-4 md:space-y-6">
           {/* Vehicle Title */}
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-lg shadow p-4 md:p-6">
             <h1 className="text-2xl font-bold text-gray-900 text-center">
               {vehicleDetails.year} {vehicleDetails.make} {vehicleDetails.model}
             </h1>
@@ -53,13 +78,13 @@ const VehicleListing = ({ vehicles }) => {
           </div>
 
           {/* Vehicle Info */}
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-lg shadow p-4 md:p-6">
             <div className="flex items-center gap-2 mb-4">
               <Car className="text-auction-blue-600" size={24} />
               <h2 className="text-lg font-semibold">Vehicle Information</h2>
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
                 { label: "MAKE/MODEL", value: `${vehicleDetails.make} ${vehicleDetails.model}` },
                 { label: "YEAR", value: vehicleDetails.year },
@@ -80,12 +105,12 @@ const VehicleListing = ({ vehicles }) => {
           </div>
 
           {/* Photos */}
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-lg shadow p-4 md:p-6">
             <div className="flex items-center gap-2 mb-4">
               <Camera className="text-auction-blue-600" size={24} />
               <h2 className="text-lg font-semibold">Vehicle Photos</h2>
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {[...Array(6)].map((_, index) => (
                 <div key={index} className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
                   <img
@@ -99,14 +124,14 @@ const VehicleListing = ({ vehicles }) => {
           </div>
         </div>
 
-        {/* Right Column - Bid Info */}
-        <div className="space-y-6">
+        {/* Right Column - Bid Info (Hidden on mobile) */}
+        <div className="hidden md:block space-y-6">
           {/* Current Bid */}
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Clock className="text-auction-blue-600" size={20} />
-                <span className="text-red-600 font-semibold">2h 15m left</span>
+                <span className="text-red-600 font-semibold">{vehicleDetails.timeLeft} left</span>
               </div>
               <div className="text-sm text-gray-500">
                 Min Increment: $100
@@ -121,7 +146,7 @@ const VehicleListing = ({ vehicles }) => {
             </div>
 
             {/* Bid Form */}
-            <form onSubmit={handleBidSubmit} className="space-y-4">
+            <form id="bid-form" onSubmit={handleBidSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Your Bid Amount

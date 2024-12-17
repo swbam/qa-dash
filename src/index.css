@@ -7,9 +7,61 @@
 @layer base {
   html {
     font-family: 'Overpass', sans-serif;
+    height: 100%;
+  }
+
+  body {
+    @apply bg-gray-50;
+    height: 100%;
+  }
+
+  #root {
+    height: 100%;
   }
 }
 
-body {
-  @apply bg-gray-50;
+@layer utilities {
+  .h-safe-area-bottom {
+    height: env(safe-area-inset-bottom, 0px);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  /* Mobile drawer pull indicator animation */
+  .drawer-pull {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .drawer-pull::after {
+    content: '';
+    position: absolute;
+    width: 32px;
+    height: 4px;
+    background-color: theme('colors.gray.300');
+    border-radius: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 8px;
+    transition: opacity 0.2s;
+  }
+
+  .drawer-pull:active::after {
+    opacity: 0.5;
+  }
+
+  /* Mobile touch handling */
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
+
+  .touch-none {
+    touch-action: none;
+  }
 }

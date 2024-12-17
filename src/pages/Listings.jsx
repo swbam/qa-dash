@@ -62,8 +62,8 @@ const Listings = ({ vehicles, makes }) => {
 
       {/* Search and Filters */}
       <div className="bg-white p-4 rounded-lg shadow">
-        <div className="flex flex-col lg:flex-row gap-4">
-          <div className="flex-1 relative">
+        <div className="flex flex-col gap-4">
+          <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="text"
@@ -73,10 +73,10 @@ const Listings = ({ vehicles, makes }) => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <div className="flex gap-4">
-            <div className="relative">
+          <div className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:pb-0">
+            <div className="relative flex-shrink-0">
               <button 
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+                className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 whitespace-nowrap"
                 onClick={() => setShowMakes(!showMakes)}
               >
                 <Filter size={20} />
@@ -84,7 +84,7 @@ const Listings = ({ vehicles, makes }) => {
                 <ChevronDown size={16} />
               </button>
               {showMakes && (
-                <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg z-10 border border-gray-200">
+                <div className="absolute left-0 right-0 mt-2 w-64 bg-white rounded-md shadow-lg z-10 border border-gray-200">
                   <div className="p-2">
                     {makes.map((make) => (
                       <label key={make.name} className="flex items-center p-2 hover:bg-gray-50 rounded cursor-pointer">
@@ -103,9 +103,9 @@ const Listings = ({ vehicles, makes }) => {
                 </div>
               )}
             </div>
-            <div className="relative">
+            <div className="relative flex-shrink-0">
               <button 
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+                className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 whitespace-nowrap"
                 onClick={() => setShowSort(!showSort)}
               >
                 Sort by
@@ -135,9 +135,9 @@ const Listings = ({ vehicles, makes }) => {
       </div>
 
       {/* Vehicle Makes */}
-      <div className="bg-white p-4 rounded-lg shadow">
+      <div className="bg-white p-4 rounded-lg shadow overflow-hidden">
         <h2 className="text-lg font-medium text-gray-900 mb-4">Popular Makes</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4">
           {makes.map((make) => (
             <button
               key={make.name}
@@ -167,9 +167,9 @@ const Listings = ({ vehicles, makes }) => {
       </div>
 
       {/* Listings Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
         {sortedVehicles.map((vehicle) => (
-          <div key={vehicle.id} className="bg-white rounded-lg shadow overflow-hidden max-w-sm mx-auto w-full">
+          <div key={vehicle.id} className="bg-white rounded-lg shadow overflow-hidden">
             <div className="cursor-pointer" onClick={() => navigate(`/listings/${vehicle.id}`)}>
               <div className="aspect-w-16 aspect-h-9">
                 <img
