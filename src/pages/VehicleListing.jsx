@@ -69,12 +69,69 @@ const VehicleListing = ({ vehicles }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 pb-[200px] md:pb-0">
         {/* Left Column - Main Info */}
         <div className="lg:col-span-2 space-y-4 md:space-y-6">
-          {/* Vehicle Title */}
+          {/* Vehicle Title and Bid Info */}
           <div className="bg-white rounded-lg shadow p-4 md:p-6">
-            <h1 className="text-2xl font-bold text-gray-900 text-center">
-              {vehicleDetails.year} {vehicleDetails.make} {vehicleDetails.model}
-            </h1>
-            <p className="text-gray-500 mt-2 text-center">Control #: {vehicleDetails.controlNumber}</p>
+            <div className="mb-6">
+              <h1 className="text-2xl font-bold text-gray-900">
+                {vehicleDetails.year} {vehicleDetails.make} {vehicleDetails.model}
+              </h1>
+              <p className="text-gray-500 mt-1">Control #: {vehicleDetails.controlNumber}</p>
+            </div>
+
+            {/* Desktop Bid Info */}
+            <div className="hidden md:block">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Clock className="text-auction-blue-600" size={20} />
+                  <span className="text-red-600 font-semibold">{vehicleDetails.timeLeft} left</span>
+                </div>
+                <div className="text-sm text-gray-500">
+                  Min Increment: $100
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-6">
+                <div className="bg-auction-blue-50 rounded-lg border-2 border-auction-blue-600 p-4">
+                  <div className="text-sm text-auction-blue-600 font-medium">CURRENT BID</div>
+                  <div className="text-3xl font-bold text-auction-blue-800">
+                    ${vehicleDetails.currentBid}
+                  </div>
+                </div>
+
+                {/* Bid Form */}
+                <form id="bid-form" onSubmit={handleBidSubmit} className="flex-1 flex gap-4">
+                  <div className="flex-1">
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <DollarSign className="text-gray-400" size={20} />
+                      </div>
+                      <input
+                        type="number"
+                        min={minBidAmount}
+                        step={100}
+                        value={bidAmount}
+                        onChange={(e) => setBidAmount(e.target.value)}
+                        className="block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-auction-blue-600 focus:border-auction-blue-600"
+                        placeholder="Enter bid amount"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="bg-auction-blue-600 text-white px-6 py-2 rounded-md hover:bg-auction-blue-800 transition-colors font-medium whitespace-nowrap"
+                  >
+                    Place Bid
+                  </button>
+                </form>
+              </div>
+
+              <div className="mt-4 flex items-start gap-2 text-sm text-gray-500">
+                <AlertTriangle size={16} className="mt-0.5 flex-shrink-0" />
+                <p>
+                  By placing a bid, you agree to our terms and conditions. All bids are final and cannot be retracted.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Vehicle Info */}
@@ -103,14 +160,16 @@ const VehicleListing = ({ vehicles }) => {
               <VehicleCondition conditions={vehicleDetails.conditions} />
             </div>
           </div>
+        </div>
 
-          {/* Photos */}
+        {/* Right Column - Photos */}
+        <div className="space-y-6">
           <div className="bg-white rounded-lg shadow p-4 md:p-6">
             <div className="flex items-center gap-2 mb-4">
               <Camera className="text-auction-blue-600" size={24} />
               <h2 className="text-lg font-semibold">Vehicle Photos</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {[...Array(6)].map((_, index) => (
                 <div key={index} className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
                   <img
@@ -120,65 +179,6 @@ const VehicleListing = ({ vehicles }) => {
                   />
                 </div>
               ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column - Bid Info (Hidden on mobile) */}
-        <div className="hidden md:block space-y-6">
-          {/* Current Bid */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Clock className="text-auction-blue-600" size={20} />
-                <span className="text-red-600 font-semibold">{vehicleDetails.timeLeft} left</span>
-              </div>
-              <div className="text-sm text-gray-500">
-                Min Increment: $100
-              </div>
-            </div>
-            
-            <div className="text-center p-4 bg-auction-blue-50 rounded-lg border-2 border-auction-blue-600 mb-4">
-              <div className="text-sm text-auction-blue-600 font-medium">CURRENT BID</div>
-              <div className="text-3xl font-bold text-auction-blue-800">
-                ${vehicleDetails.currentBid}
-              </div>
-            </div>
-
-            {/* Bid Form */}
-            <form id="bid-form" onSubmit={handleBidSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Your Bid Amount
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <DollarSign className="text-gray-400" size={20} />
-                  </div>
-                  <input
-                    type="number"
-                    min={minBidAmount}
-                    step={100}
-                    value={bidAmount}
-                    onChange={(e) => setBidAmount(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-auction-blue-600 focus:border-auction-blue-600"
-                    placeholder="Enter bid amount"
-                  />
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-auction-blue-600 text-white py-3 px-4 rounded-md hover:bg-auction-blue-800 transition-colors font-medium"
-              >
-                Place Bid
-              </button>
-            </form>
-
-            <div className="mt-4 flex items-start gap-2 text-sm text-gray-500">
-              <AlertTriangle size={16} className="mt-0.5 flex-shrink-0" />
-              <p>
-                By placing a bid, you agree to our terms and conditions. All bids are final and cannot be retracted.
-              </p>
             </div>
           </div>
         </div>
