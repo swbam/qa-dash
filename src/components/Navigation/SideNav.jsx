@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   GalleryHorizontalEnd, 
   Gavel, 
   History,
-  Settings,
-  X
+  Settings
 } from 'lucide-react';
 
 const navItems = [
@@ -15,36 +14,17 @@ const navItems = [
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];
 
-const SideNav = ({ isDrawerOpen, setIsDrawerOpen, isMobile }) => {
+const SideNav = ({ isDrawerOpen, setIsDrawerOpen }) => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const handleNavClick = (item) => {
     if (item.isDrawerTrigger) {
       setIsDrawerOpen(!isDrawerOpen);
-    } else {
-      navigate(item.path);
-      if (isMobile) {
-        // Close mobile menu when navigating
-        document.dispatchEvent(new CustomEvent('closeMobileMenu'));
-      }
     }
   };
 
   return (
-    <aside className="h-full flex flex-col bg-white">
-      {isMobile && (
-        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-          <img src="/logo.webp" alt="Logo" className="h-6" />
-          <button 
-            onClick={() => document.dispatchEvent(new CustomEvent('closeMobileMenu'))}
-            className="text-gray-500 hover:text-gray-700"
-          >
-            <X size={24} />
-          </button>
-        </div>
-      )}
-      
+    <aside className="fixed left-0 top-[67px] h-[calc(100vh-67px)] w-64 bg-white border-r border-gray-200">
       <div className="flex-1 px-3 py-4 overflow-y-auto">
         <ul className="space-y-2">
           {navItems.map((item) => {
@@ -54,29 +34,40 @@ const SideNav = ({ isDrawerOpen, setIsDrawerOpen, isMobile }) => {
             
             return (
               <li key={item.name}>
-                <button
-                  onClick={() => handleNavClick(item)}
-                  className={`flex items-center w-full p-2 text-base font-normal rounded-lg ${
-                    isActive || isPastResultsActive
-                      ? 'bg-auction-blue-50 text-auction-blue-600'
-                      : 'text-gray-900 hover:bg-gray-100'
-                  }`}
-                >
-                  <Icon className={`w-6 h-6 transition duration-75 ${
-                    isActive || isPastResultsActive ? 'text-auction-blue-600' : 'text-gray-500'
-                  }`} />
-                  <span className="ml-3">{item.name}</span>
-                </button>
+                {item.isDrawerTrigger ? (
+                  <button
+                    onClick={() => handleNavClick(item)}
+                    className={`flex items-center w-full p-2 text-base font-normal rounded-lg ${
+                      isPastResultsActive
+                        ? 'bg-auction-blue-50 text-auction-blue-600'
+                        : 'text-gray-900 hover:bg-gray-100'
+                    }`}
+                  >
+                    <Icon className={`w-6 h-6 transition duration-75 ${
+                      isPastResultsActive ? 'text-auction-blue-600' : 'text-gray-500'
+                    }`} />
+                    <span className="ml-3">{item.name}</span>
+                  </button>
+                ) : (
+                  <Link
+                    to={item.path}
+                    className={`flex items-center p-2 text-base font-normal rounded-lg ${
+                      isActive
+                        ? 'bg-auction-blue-50 text-auction-blue-600'
+                        : 'text-gray-900 hover:bg-gray-100'
+                    }`}
+                  >
+                    <Icon className={`w-6 h-6 transition duration-75 ${
+                      isActive ? 'text-auction-blue-600' : 'text-gray-500'
+                    }`} />
+                    <span className="ml-3">{item.name}</span>
+                  </Link>
+                )}
               </li>
             );
           })}
         </ul>
       </div>
-
-      {/* Mobile Safe Area */}
-      {isMobile && (
-        <div className="h-safe-area-bottom bg-white" />
-      )}
     </aside>
   );
 };
