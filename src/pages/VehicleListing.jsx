@@ -40,7 +40,7 @@ const VehicleListing = ({ vehicles }) => {
   const minBidAmount = parseInt(vehicleDetails.currentBid?.replace(/,/g, '')) + 100 || 0;
 
   return (
-    <div className="space-y-4 md:space-y-6">
+    <div className="space-y-4 md:space-y-6 max-w-[1600px] mx-auto">
       {/* Mobile Bid Info - Fixed to bottom on mobile */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 pb-safe">
         <div className="flex items-center justify-between mb-3">
@@ -66,9 +66,9 @@ const VehicleListing = ({ vehicles }) => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 pb-[200px] md:pb-0">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 pb-[200px] md:pb-0">
         {/* Left Column - Main Info */}
-        <div className="lg:col-span-2 space-y-4 md:space-y-6">
+        <div className="lg:col-span-7 space-y-4 md:space-y-6">
           {/* Vehicle Title and Bid Info */}
           <div className="bg-white rounded-lg shadow p-4 md:p-6">
             <div className="mb-6">
@@ -79,7 +79,7 @@ const VehicleListing = ({ vehicles }) => {
             </div>
 
             {/* Desktop Bid Info */}
-            <div className="hidden md:block">
+            <div className="hidden md:block max-w-3xl">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Clock className="text-auction-blue-600" size={20} />
@@ -91,7 +91,7 @@ const VehicleListing = ({ vehicles }) => {
               </div>
               
               <div className="flex items-center gap-6">
-                <div className="bg-auction-blue-50 rounded-lg border-2 border-auction-blue-600 p-4">
+                <div className="bg-auction-blue-50 rounded-lg border-2 border-auction-blue-600 p-4 w-48">
                   <div className="text-sm text-auction-blue-600 font-medium">CURRENT BID</div>
                   <div className="text-3xl font-bold text-auction-blue-800">
                     ${vehicleDetails.currentBid}
@@ -99,7 +99,7 @@ const VehicleListing = ({ vehicles }) => {
                 </div>
 
                 {/* Bid Form */}
-                <form id="bid-form" onSubmit={handleBidSubmit} className="flex-1 flex gap-4">
+                <form id="bid-form" onSubmit={handleBidSubmit} className="flex-1 flex gap-4 max-w-lg">
                   <div className="flex-1">
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -163,7 +163,7 @@ const VehicleListing = ({ vehicles }) => {
         </div>
 
         {/* Right Column - Photos */}
-        <div className="space-y-6">
+        <div className="lg:col-span-5 space-y-6">
           <div className="bg-white rounded-lg shadow p-4 md:p-6">
             <div className="flex items-center gap-2 mb-4">
               <Camera className="text-auction-blue-600" size={24} />
