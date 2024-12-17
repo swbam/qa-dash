@@ -4,7 +4,8 @@ import {
   GalleryHorizontalEnd, 
   Gavel, 
   History,
-  Settings
+  Settings,
+  X
 } from 'lucide-react';
 
 const navItems = [
@@ -14,17 +15,31 @@ const navItems = [
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];
 
-const SideNav = ({ isDrawerOpen, setIsDrawerOpen }) => {
+const SideNav = ({ isDrawerOpen, setIsDrawerOpen, isMobile, onClose }) => {
   const location = useLocation();
 
   const handleNavClick = (item) => {
     if (item.isDrawerTrigger) {
       setIsDrawerOpen(!isDrawerOpen);
+    } else if (isMobile && onClose) {
+      onClose();
     }
   };
 
   return (
-    <aside className="fixed left-0 top-[67px] h-[calc(100vh-67px)] w-64 bg-white border-r border-gray-200">
+    <div className="h-full flex flex-col bg-white">
+      {isMobile && (
+        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
+          <img src="/logo.webp" alt="Logo" className="h-6" />
+          <button 
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700"
+          >
+            <X size={24} />
+          </button>
+        </div>
+      )}
+      
       <div className="flex-1 px-3 py-4 overflow-y-auto">
         <ul className="space-y-2">
           {navItems.map((item) => {
@@ -51,6 +66,7 @@ const SideNav = ({ isDrawerOpen, setIsDrawerOpen }) => {
                 ) : (
                   <Link
                     to={item.path}
+                    onClick={() => handleNavClick(item)}
                     className={`flex items-center p-2 text-base font-normal rounded-lg ${
                       isActive
                         ? 'bg-auction-blue-50 text-auction-blue-600'
@@ -68,7 +84,12 @@ const SideNav = ({ isDrawerOpen, setIsDrawerOpen }) => {
           })}
         </ul>
       </div>
-    </aside>
+
+      {/* Mobile Safe Area */}
+      {isMobile && (
+        <div className="h-safe-area-bottom bg-white" />
+      )}
+    </div>
   );
 };
 
