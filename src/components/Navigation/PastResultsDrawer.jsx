@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import VehicleLogo from '../VehicleLogo';
 
 // Create past results using actual vehicle data
 const createPastResults = (vehicles) => {
@@ -51,15 +52,10 @@ const PastResultsDrawer = ({ isOpen, onClose, vehicles }) => {
       ? `/sale-confirmation/${result.id}`
       : `/listings/${result.id}`;
     navigate(path);
-    onClose();
   };
 
   return (
-    <div 
-      className={`fixed left-64 top-[67px] h-[calc(100vh-67px)] w-80 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
-        isOpen ? 'translate-x-0' : '-translate-x-full'
-      }`}
-    >
+    <div className="h-full w-80 bg-white border-r border-gray-200">
       <div className="h-full flex flex-col">
         {/* Header */}
         <div className="p-4 border-b border-gray-200">
@@ -77,6 +73,7 @@ const PastResultsDrawer = ({ isOpen, onClose, vehicles }) => {
               >
                 <div className="p-4">
                   <div className="flex items-center space-x-3">
+                    <VehicleLogo make={result.make} size="small" />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900 truncate">
                         {result.title}

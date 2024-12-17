@@ -4,7 +4,7 @@ import TopNav from '../Navigation/TopNav';
 import SideNav from '../Navigation/SideNav';
 import PastResultsDrawer from '../Navigation/PastResultsDrawer';
 
-const MainLayout = ({ vehicles, wonAuctions }) => {
+const MainLayout = ({ vehicles }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const location = useLocation();
 
@@ -21,14 +21,17 @@ const MainLayout = ({ vehicles, wonAuctions }) => {
   return (
     <div className="min-h-screen bg-[#f7fafc]">
       <TopNav />
-      <SideNav isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
       <div className="flex">
-        <PastResultsDrawer 
-          isOpen={isDrawerOpen} 
-          onClose={() => setIsDrawerOpen(false)}
-          vehicles={vehicles}
-          wonAuctions={wonAuctions}
-        />
+        <SideNav isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
+        <div className={`fixed left-64 top-[67px] h-[calc(100vh-67px)] transition-transform duration-300 ease-in-out transform ${
+          isDrawerOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}>
+          <PastResultsDrawer 
+            isOpen={isDrawerOpen} 
+            onClose={() => setIsDrawerOpen(false)}
+            vehicles={vehicles}
+          />
+        </div>
         <main className={`pt-[67px] pl-64 flex-1 transition-all duration-300 ease-in-out ${
           isDrawerOpen ? 'ml-80' : ''
         }`}>
